@@ -1,0 +1,635 @@
+
+create external table if not exists devl_df2_us9.country(country_id STRING,country_name STRING)
+row format delimited 
+fields terminated by ','
+stored as textfile;
+
+
+create table if not exists devl_df2_us9.city(country_id STRING,city STRING)
+row format delimited 
+fields terminated by ','
+stored as textfile;
+
+
+insert into table devl_df2_us9.country values ('10149','brazil');
+insert into table devl_df2_us9.country values ('10155','india');
+insert into table devl_df2_us9.country values ('10363','america');
+insert into table devl_df2_us9.country values ('10400','england');
+insert into table devl_df2_us9.country values ('10437','srilanka');
+
+
+
+insert into table devl_df2_us9.country values ('10149','braza');
+insert into table devl_df2_us9.country values ('10155','bangalore');
+insert into table devl_df2_us9.country values ('10363','chicago');
+insert into table devl_df2_us9.country values ('10400','null');
+insert into table devl_df2_us9.country values ('10437','colombo');
+
+select a.country
+
+
+
+10149,brazil
+10155,india
+10363,america
+10400,england
+10437,srilanka
+
+10149,braza
+10155,bangalore
+10363,chicago
+10400,
+10437,colombo
+10155,chennai
+10155,kolkata
+10155,mumbai
+
+
+select c.country_name from (select a.country_name, count(a.country_name) as count from devl_df2_us9.country a left outer join devl_df2_us9.city b on a.country_id = b.country_id group by a.country_name having count>3;) c
+where c.count < 3;
+
+1. SELECT c.* FROM country c LEFT OUTER JOIN city i ON c.countryid = i.countryid WHERE i.countryid IS NULL 
+
+2.SELECT c.countryId, c.countryname FROM country c INNER JOIN city i ON c.countryid = i.countryid GROUP BY c.countryId, c.countryname HAVING COUNT(c.countryId) < 3
+
+- Murali Mohan 6 years ago | Flag
+
+Array(Array(1,2,3),Array(3,4,5),Array(3,6,7))
+
+var c = ""
+var g = ""
+def solution(input: String) : Unit ={
+
+for( i <- 0 until input.length by 2){
+//if ( i == 0)
+c = c  + input.charAt(i)
+//else
+////c = c + ',' + input.charAt(i)
+//c = c + input.charAt(i)
+}
+
+for( i <- 1 until input.length by 2){
+//if ( i == 1)
+//g = g  + input.charAt(i)
+//else
+//g = g + ',' + input.charAt(i)
+g = g + input.charAt(i)
+}
+}
+
+
+var h = 0
+
+def run( str : String, cnt : String) : Unit ={
+var counts = new scala.collection.mutable.HashMap[Char,Int].withDefaultValue(0)
+var i = 0
+//val until = str.length
+for(i <- 0 until  str.length) {
+var l = str.charAt(i)
+var m = cnt.charAt(i).toInt
+println(l)
+println(m)
+counts.put(l,m)
+println(counts)
+//else
+//counts.put(c, 1)
+//i += 2
+}
+}
+
+
+
+def soltion( value : Int) : Boolean={
+val c = (value/10).toString 
+if(((value % 10)!= 0) && (c.group)
+return false
+else true
+} 
+var value = 0
+
+
+def solution(value : Int, div : Int) : Any ={
+var b = value.toDouble/div
+if(b == div){
+return true
+}
+else if ((b.toInt < div.toInt) || ( !b.isInstanceOf[Int]) || ((value.toInt % div.toInt) != 0) ){
+return false
+}
+return solution(b.toInt,div)
+}
+
+
+
+soltion(value,div)
+
+def log10(x: Double) = scala.math.log(x)/scala.math.log(10)
+
+
+val input = "acacabcatghhellomvnsdb"
+
+val words = Array("aca","cat","hello","world")
+
+def count(input : String, words : Array[String]) : Unit ={
+var beginchar = new scala.collection.mutable.HashMap[Char,String].withDefaultValue("")
+var wordcnt = new scala.collection.mutable.HashMap[String,Int].withDefaultValue(0)
+
+for(i <- 0 to  words.length-1)
+{
+var chars = words(i).charAt(0)
+beginchar.put(chars,words(i))
+}
+
+for(i <- 0 to input.length-1)
+{
+if(beginchar.contains(input(i)))
+{
+var a = beginchar.get(input(i)).get
+println(s"$a")
+var some = input.substring(i,i+a.size)
+println(s"dd$some")
+if(a.equals(some)){
+if(wordcnt.contains(a))
+{
+wordcnt.put(a,wordcnt(a)+1)
+}else{
+wordcnt.put(a,1)
+}
+}
+}
+}
+
+
+
+
+var i = 0
+//val until = str.length
+for(i <- 0 until  str.length) {
+var l = str.charAt(i)
+var m = cnt.charAt(i).toInt
+println(l)
+println(m)
+counts.put(l,m)
+println(counts)
+//else
+//counts.put(c, 1)
+//i += 2
+}
+}
+
+-------------------------------------------
+
+public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt();
+		scan.close();
+		
+		if (n <= 3) {
+			System.out.println(n);
+			return;
+		}
+		
+		int sqrt = (int)Math.sqrt(n);
+		if (sqrt*sqrt == n) {
+			// Number itself is perfect sqr
+			System.out.println(1);
+			return;
+		}
+	
+		
+		int dp[] = new int[n+1];
+		dp[0] = 0;
+		dp[1] = 1;
+		dp[2] = 2;
+		dp[3] = 3;
+		
+		for (int i = 4; i <= n; i++) {
+			dp[i] = i;
+			
+			for (int j = 1; j <= (int)Math.sqrt(i); j++) {
+				int temp = j*j;
+				if (temp > n) {
+					break;
+				}
+				dp[i] = Math.min(dp[i], 1+dp[i-temp]);
+			}
+		}
+		
+		System.out.println(dp[n]);
+
+import scala.util.control._		
+def main(args: Array[String]): Unit = {	
+	
+
+val loop = new Breaks		
+val scanner = new java.util.Scanner(System.in)
+val n = scanner.nextLine()
+
+def squares(n: Int) : Unit ={
+
+if (n <= 3) {
+println(n) 
+}
+
+val sqrt = Math.sqrt(n).toInt;
+if (sqrt*sqrt == n) {
+//Number itself is perfect sqr
+println(1)
+//return
+}
+
+var dp = new  Array[Int](n+1)
+//int dp[] = new int[n+1];
+dp(0) = 0
+dp(1) = 1
+dp(2) = 2
+dp(3) = 3
+
+val loop = new Breaks
+loop.breakable {
+for (i <- 4 to  n) {
+dp(i) = i
+println(s"${dp(i)}a")
+for (j <- 1 to Math.sqrt(i).toInt) {
+var  temp = j*j
+if (temp > n) {
+loop.break
+}
+dp(i) = Math.min(dp(i), 1+dp(i-temp))
+println(s"${dp(i)}b")
+}
+}
+//println(s"${dp(n)}b")
+}
+}
+
+--remove duplicates from a sorted array
+
+def rmDuplicates(a: Array[Int]): Array[Int] = a match {
+case Array() => Array()
+case Array(e,tail@_*) => e +: rmDuplicates(tail.filterNot(x => e == x).toArray)
+}
+
+5,1,6,2,4,3
+
+val a = Array(5,1,6,2,4,3)
+
+--bubble sort
+def bubblesort(a : Array[Int]) : Array[Int] = {
+
+var flag = false
+for (i <- 0 to a.length-2)
+
+if (a(i+1) < a(i)){
+
+var tmp = a(i+1)
+a(i+1) = a(i)
+a(i) = tmp
+flag = true
+println(s"${a(i)}")
+println(s"${a(i+1)}")
+}
+
+if(flag)
+bubblesort(a)
+else
+a
+}
+
+val a = Array(5,1,6,2,4,3)
+
+-- selection sort
+
+val arr = Array(5,1,6,2,4,3)
+
+
+def selectionsort(arr : Array[Int]) : Unit = {
+
+var min_idx = 0
+var temp = 0
+for (i <- 0 until arr.length-1) 
+{
+min_idx = i
+for (j <- i+1 until arr.length)
+if (arr(j) < arr(min_idx))
+min_idx = j
+println(s"$min_idx")
+temp = arr(min_idx)
+arr(min_idx) = arr(i)
+arr(i) = temp
+println(s"${arr(i)}")
+} 
+} 
+
+-----------
+
+def mergeSort[T <% Ordered[T]](xs: List[T]): List[T] = {
+def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
+case (_, Nil) => xs 
+case (Nil, _) => ys 
+case (x :: xs1, y :: ys1) =>
+if (x < y) x :: merge(xs1, ys)
+
+else y :: merge(xs, ys1)
+
+}
+val n = xs.length / 2
+if (n == 0) xs
+else {
+val (left, right) = xs splitAt(n)
+merge(mergeSort(left), mergeSort(right))
+}
+}
+---------------------------------------------------------------
+def mergeSort(xs: List[Int]): List[Int] = {
+  val n = xs.length / 2
+  if (n == 0) xs
+  else {
+    val (left, right) = xs splitAt(n)
+    merge(mergeSort(left), mergeSort(right))
+  }
+}  
+
+def merge(xs: List[Int], ys: List[Int]): List[Int] =
+        (xs, ys) match {
+        case(Nil, ys) => ys
+        case(xs, Nil) => xs
+        case(x :: xs1, y :: ys1) =>
+          if (x < y) x::merge(xs1, ys)
+          else y :: merge(xs, ys1)
+    }
+	
+	
+	// We have data about users, transaction, and customer service tickets. How should we store that information in SQL?
+
+
+users (user_id, username, geography)
+
+transaction (user_id, bankdetails, trans amount, geography, transaction_id)
+
+cs (user_id, transaction_id, ticket_id, geography, purpose)
+
+
+// Say we record user country. Write a query to find which country has the largest average CS tickets per user.
+
+// users 
+// 1, india
+// 2, india
+// 3, italy
+// 4, india
+
+// users.geography   users.user_id   purpose
+// india               1           hotel booking              for each geography: india -> 3/2
+// india               1           cab booking                                  italy -> 1/1
+// india               2           cab booking                  
+// italy               3           cab booking                  
+
+
+select geography , avergae(geography and distibct count) from (
+
+select a.geography, count(a.geography) / count(distinct a.userid) as average from users a left join cs  b on a.user_id=b.user_id group by a.gerography
+    
+------------------------------------------------
+
+public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt();
+		scan.close();
+		
+		if (n <= 3) {
+			System.out.println(n);
+			return;
+		}
+		
+		int sqrt = (int)Math.sqrt(n);
+		if (sqrt*sqrt == n) {
+			// Number itself is perfect sqr
+			System.out.println(1);
+			return;
+		}
+	
+		
+		int dp[] = new int[n+1];
+		dp[0] = 0;
+		dp[1] = 1;
+		dp[2] = 2;
+		dp[3] = 3;
+		
+		for (int i = 4; i <= n; i++) {
+			dp[i] = i;
+			
+			for (int j = 1; j <= (int)Math.sqrt(i); j++) {
+				int temp = j*j;
+				if (temp > n) {
+					break;
+				}
+				dp[i] = Math.min(dp[i], 1+dp[i-temp]);
+			}
+		}
+		
+		System.out.println(dp[n]);
+
+import scala.util.control._		
+def main(args: Array[String]): Unit = {	
+	
+
+val loop = new Breaks		
+val scanner = new java.util.Scanner(System.in)
+val n = scanner.nextLine()
+
+def squares(n: Int) : Unit ={
+
+if (n <= 3) {
+println(n) 
+}
+
+val sqrt = Math.sqrt(n).toInt;
+if (sqrt*sqrt == n) {
+//Number itself is perfect sqr
+println(1)
+//return
+}
+
+var dp = new  Array[Int](n+1)
+//int dp[] = new int[n+1];
+dp(0) = 0
+dp(1) = 1
+dp(2) = 2
+dp(3) = 3
+
+val loop = new Breaks
+loop.breakable {
+for (i <- 4 to  n) {
+dp(i) = i
+println(s"${dp(i)}a")
+for (j <- 1 to Math.sqrt(i).toInt) {
+var  temp = j*j
+if (temp > n) {
+loop.break
+}
+dp(i) = Math.min(dp(i), 1+dp(i-temp))
+println(s"${dp(i)}b")
+}
+}
+//println(s"${dp(n)}b")
+}
+}
+
+
+
+CREATE TABLE uacc_ch9_batch.ch9_chre_metadata_store (                                                               
+id_seq INT NOT NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                       
+asset_type STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                    
+src_db_name STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                   
+src_tab_name STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                  
+dst_db_name STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                   
+dst_tab_name STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                  
+periodicity STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                   
+description STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                   
+status STRING NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                        
+start_loading_date TIMESTAMP NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                         
+finish_loading_date TIMESTAMP NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                        
+rec_count INT NULL ENCODING AUTO_ENCODING COMPRESSION DEFAULT_COMPRESSION,                                        
+PRIMARY KEY (id_seq)                                                                                              
+)                                                                                                                   
+PARTITION BY HASH (id_seq) PARTITIONS 2                                                                             
+STORED AS KUDU                                                                                                      
+TBLPROPERTIES ('kudu.master_addresses'='dubs01hdid08d.rxcorp.com,dubs05hdid08d.rxcorp.com,dubs09hdid08d.rxcorp.com')
+
+
+
+------------------------------------
+
+import spark.implicits._
+val removeDoubleQuotes = udf( (x:String) => x.replace(",",""))
+
+val df = spark.read.format("com.databricks.spark.csv").option("header","true").option("escape", "\"").load(csvInPath)
+val actual_data = df.withColumn("review_text", removeDoubleQuotes($"review_text"))
+val some = actual_data.rdd.map( a => a.toString)
+val headerAndRows = some.map(line => line.split(",").map(_.trim))
+val header = Array("review_text", "product_rating", "helpfulness_rating")
+val maps = headerAndRows.map(splits => header.zip(splits).toMap)
+
+
+val some =  df.map(x => (x.getString(0),x.getString(1),x.getString(2)))
+
+ val actual_records = some.map({case(review_text,product_rating,helpfulness_rating) => (review_text,product_rating,if (helpfulness_rating > 10) -1 else helpfulness_rating)})
+ actual_records.map(_._3).filter( a => a== -1).count
+ actual_records.filter(x => !((x._1 == null) || (x._1 == ""))).filter(x => x._1.contains("weighing") && x._1.contains("scale")).filter(x => (x._2 == 1) || (x._2 == 3) || (x._2 == 2)).take(1)
+ 
+ 
+def do_search(d : List[Int],h : List[String]) = 
+{
+val df = spark.read.format("com.databricks.spark.csv").option("header","true").option("escape", "\"").load(csvInPath)
+val some =  df.map(x => (x.getString(0),x.getString(1).toFloat,x.getString(2).toFloat))
+val actual_records = some.map({case(review_text,product_rating,helpfulness_rating) => (review_text,product_rating,if (helpfulness_rating > 10) -1 else helpfulness_rating)})
+var string_prdtrtng = new StringBuffer()
+for (i <- 0 until d.length) 
+{
+val some = d(i).toString
+if (i != d.length - 1){
+string_prdtrtng.append(" x._2 == ").append(some).append(" || ")
+}else
+string_prdtrtng.append("x._2 == ").append(some)
+}
+var string = new StringBuffer()
+for (i <- 0 until h.length) 
+{
+val some = h(i).toString
+if (i != h.length - 1){
+string.append(" x._1.contains(\"").append(some).append("\")").append(" && ")
+}else
+string.append(" x._1.contains(\"").append(some).append("\")")
+}
+val final = actual_records.filter(x => !((x._1 == null) || (x._1 == ""))).filter(x => s"$string" ).filter(x => s"$string_prdtrtng")
+}
+
+		
+		
+Fizz and buzz question
+
+import java.io._
+import java.math._
+import java.security._
+import java.text._
+import java.util._
+import java.util.concurrent._
+import java.util.function._
+import java.util.regex._
+import java.util.stream._
+import scala.collection.immutable._
+import scala.collection.mutable._
+import scala.collection.concurrent._
+import scala.concurrent._
+import scala.io._
+import scala.math._
+import scala.sys._
+import scala.util.matching._
+import scala.reflect._
+
+
+
+object Result {
+
+    /*
+     * Complete the 'fizzBuzz' function below.
+     *
+     * The function accepts INTEGER n as parameter.
+     */
+
+def fizzBuzz(n: Int) {
+
+for(i <- 1 to n){
+
+i match {
+
+case i if(i%3 == 0 && i%5 == 0) => println("FizzBuzz")
+case i if(i%3 == 0) => println("Fizz")
+case i if(i%5 == 0) => println("Buzz")
+case _ => println(i) 
+
+}
+
+    }
+
+}
+}
+object Solution {
+
+
+---visa interview question to find sum of all the steps
+
+
+var sum = 0
+
+def compute(a:Int , b:Int):Int ={
+    
+if(a > 0 && b > 0){
+sum += Math.abs((a%10) - (b%10))
+println(sum)
+println(a/10,b/10)
+
+compute(a/10,b/10)
+}else 
+
+sum
+
+} 
+
+def solution(a: Array[Int], b : Array[Int]): Int ={
+	
+
+val len = a.length	
+for(i <- 0 until len ) {
+	
+	println(a(i))
+	println(b(i))
+compute(a(i),b(i))
+
+//println(compute(a(i),b(i)))
+
+} 
+ sum
+}
+
+solution(Array(1234,4321),Array(2345,3214))
