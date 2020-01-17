@@ -1,0 +1,52 @@
+--to find size of each file
+
+// you can also use imports, for example:
+ import java.util.*;
+ import java.io.BufferedReader;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public String solution(String S) {
+        // write your code in Java SE 8
+        //BufferedReader s1=new BufferedReader(S);
+        long sum_music=0;
+        long sum_image=0;
+        long sum_movie=0;
+        long sum_other=0;
+        Scanner scanner = new Scanner(S);
+                while (scanner.hasNextLine()) {
+                     String line = scanner.nextLine();
+                     
+                      String [] array=line.split(" ");
+            String a1=array[0].substring(array[0].lastIndexOf("."));
+            String a2=array[1].substring(0, array[1].length() - 1);
+           // str.substring(0, str.length() - 1)
+           
+           if(a1.equals(".mp3") ||a1.equals(".aac")||a1.equals(".flac")){
+               sum_music+=Long.parseLong(a2);
+           }
+           else if(a1.equals(".jpg") ||a1.equals(".bmp")||a1.equals(".gif")){
+               sum_image+=Long.parseLong(a2);
+           }
+           else if(a1.equals(".mp4") ||a1.equals(".avi")||a1.equals(".mkv")){
+               sum_movie+=Long.parseLong(a2);
+           }
+           else{
+               sum_other+=Long.parseLong(a2);
+           }
+           
+          // process the line
+                }
+        
+     
+        
+        return ""+"music "+sum_music+"b\n"+
+                    "images "+sum_image+"b\n"+
+                    "movies "+sum_movie+"b\n"+
+                    "other "+sum_other+"b\n";
+        
+
+    }
+}
