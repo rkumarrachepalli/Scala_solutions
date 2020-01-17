@@ -111,3 +111,31 @@ println(s"$elemnets")
 //println(s"$x")
 }
 }
+
+
+. The Restructured Array A two dimensional array is presented as one dimensional array of integers. The first integer of theConstraints: 1sns 1000 1 srs 100 100 arr[i] < 100_where 1 < i < n 1 s qsn-1 1 s queries[ij[O] r where 0 <i < q 1 s queries[i]1 #include <bits/stdc++ .h> ... 10 C++ 11 *Complete the getElements function below. 12 13 *The function is expected to retuASAP Please!!!
+
+Show transcribed image text
+
+Expert Answer 
+Previous question
+Next question
+Transcribed Image Textfrom this Question
+1. The Restructured Array A two dimensional array is presented as one dimensional array of integers. The first integer of the array denotes the length of each row. The remaining integers are each elements of the array, first of row 1 then row 2 and so on. You need to answer multiple queries about the 2D array. The queries contain the row and column of the element that is required. For example, the input array is given as arr [4, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], with length being n = 13. Each row is c 4 (arr[0]) elements long (which is the number of columns), so the number of rows will be r 3 and the two dimensional array is: 2 3 1 5 7 9 10 11 12 Also, the queries is given by queries = [[3, 2], [2, 1]], with total number of queries being q 2. The element at (3, 2) is 10 and element at (2, 1) is 5. So, the output is [10, 5] Function Description Complete the function getElements in the editor below. The function must return an array of integers. getElements has the following parameter(s): arr[arr[01,...arr[n-1]}: an array of integers queries[queries[0],...queries[q-1]]: a 2d array of integers with 2 columns Constraints: 1sns 1000 1 srs 100 100 arr[i] < 100_where 1 < i < n 1 s qsn-1 1 s queries[ij[O] r where 0 <i < q 1 s queries[i][1] < c where 0 i < q Input Format for Custom Testing The first line contains an integer n, the number of integers in the array arr. Each line i of the next n lines (where 0 s i < n) contains an integer denoting arr[i]. The next line contains an integer q, the number of queries which is also the size of queries array. The next line contains the integer 2, the number of elements required to define each query which is also the number of columns of queries array. Each line i of the next q lines (where 0 s i< q) contains two space sepatated integers denoting queries[i. 1 #include <bits/stdc++ .h> ... 10 C++ 11 *Complete the 'getElements' function below. 12 13 *The function is expected to return an INTEGER_ARRAY. *The function accepts following parameters: 1. INTEGER_ARRAY arr 14 15 16 2. 2D_INTEGER_ARRAY queries */ 17 18 19 vector<int> getElements(vector<int> arr, vector<vector<int>> queries) { 20 21 22 23 24 int main() -.
+
+
+13
+4 1 2 3 4 5 6 7 8 9 10 11 12
+12
+11
+12
+13
+14
+21
+22
+23
+24
+31
+32
+33
+34
