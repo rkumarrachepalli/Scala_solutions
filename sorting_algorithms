@@ -1,0 +1,195 @@
+
+
+-----------------------------sorting algorithms-------------
+
+5,1,6,2,4,3
+
+val a = Array(5,1,6,2,4,3)
+
+--bubble sort
+def bubblesort(a : Array[Int]) : Array[Int] = {
+
+var flag = false
+for (i <- 0 to a.length-2)
+
+if (a(i+1) < a(i)){
+
+var tmp = a(i+1)
+a(i+1) = a(i)
+a(i) = tmp
+flag = true
+println(s"${a(i)}")
+println(s"${a(i+1)}")
+}
+
+if(flag)
+bubblesort(a)
+else
+a
+}
+
+val a = Array(5,1,6,2,4,3)
+
+-- selection sort
+
+val arr = Array(5,1,6,2,4,3)
+
+
+def selectionsort(arr : Array[Int]) : Unit = {
+
+var min_idx = 0
+var temp = 0
+for (i <- 0 until arr.length-1) 
+{
+min_idx = i
+for (j <- i+1 until arr.length)
+if (arr(j) < arr(min_idx))
+min_idx = j
+println(s"$min_idx")
+temp = arr(min_idx)
+arr(min_idx) = arr(i)
+arr(i) = temp
+println(s"${arr(i)}")
+} 
+} 
+
+-----------
+
+def mergeSort[T <% Ordered[T]](xs: List[T]): List[T] = {
+def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
+case (_, Nil) => xs 
+case (Nil, _) => ys 
+case (x :: xs1, y :: ys1) =>
+if (x < y) x :: merge(xs1, ys)
+
+else y :: merge(xs, ys1)
+
+}
+val n = xs.length / 2
+if (n == 0) xs
+else {
+val (left, right) = xs splitAt(n)
+merge(mergeSort(left), mergeSort(right))
+}
+}
+---------------------------------------------------------------
+def mergeSort(xs: List[Int]): List[Int] = {
+  val n = xs.length / 2
+  if (n == 0) xs
+  else {
+    val (left, right) = xs splitAt(n)
+    merge(mergeSort(left), mergeSort(right))
+  }
+}  
+
+def merge(xs: List[Int], ys: List[Int]): List[Int] =
+        (xs, ys) match {
+        case(Nil, ys) => ys
+        case(xs, Nil) => xs
+        case(x :: xs1, y :: ys1) =>
+          if (x < y) x::merge(xs1, ys)
+          else y :: merge(xs, ys1)
+    }
+
+
+
+----------
+
+for (int i = 0 until a.lenght-1) 
+{ 
+// Find the minimum element in unsorted array 
+int min_idx = i; 
+for (int j = i+1; j < n; j++) 
+if (arr[j] < arr[min_idx]) 
+min_idx = j; 
+// Swap the found minimum element with the first 
+// element 
+int temp = arr[min_idx]; 
+arr[min_idx] = arr[i]; 
+arr[i] = temp; 
+} 
+} 
+-----------
+
+
+
+---------------------------------------
+HackerRank: Sort hotels by average score. Each line of  input had the hotel ID and a review score. E.g. 1000 4 1000 7 2000 10 2000 8
+
+package booking;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+public class Hotels {
+
+    public static ArrayList test(String input) {
+
+        System.out.println("Input: \n" + input);
+
+        // read the input
+        Scanner scanner = new Scanner(input);
+
+        Map mapIdToHotel = new HashMap();
+
+        while (scanner.hasNextLine()) {
+
+            int hotelId = scanner.nextInt();
+
+            if (!mapIdToHotel.containsKey(hotelId))
+                mapIdToHotel.put(hotelId, new Hotel(hotelId));
+
+            mapIdToHotel.get(hotelId).scores.add(scanner.nextInt());
+        }
+
+        scanner.close();
+
+        // sort the hotels, primarily by score and secondarily by id
+
+        TreeSet sortedHotels = new TreeSet(new Comparator() {
+
+            @Override
+            public int compare(Hotel o1, Hotel o2) {
+
+                return Double.compare(o2.getAverageScore(), o1.getAverageScore()) * 100 + Integer.compare(o1.id, o2.id);
+            }
+        });
+        sortedHotels.addAll(mapIdToHotel.values());
+
+        // debug print
+        System.out.println("Result: \n" + sortedHotels.stream().map(h -&gt; h.toString()).collect(Collectors.joining(", ")));
+
+        return new ArrayList(sortedHotels);
+    }
+
+    public static class Hotel {
+        public int id;
+        public List scores = new ArrayList();
+
+        public Hotel(int id) {
+            this.id = id;
+        }
+
+        public double getAverageScore() {
+            return scores.stream().mapToDouble(s -&gt; new Double(s)).average().orElse(0.0);
+        }
+
+        @Override
+        public String toString() {
+            DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+            df.setMaximumFractionDigits(340); //340 = DecimalFormat.DOUBLE_FRACTION_DIGITS
+
+            return id + " " + df.format(getAverageScore());
+        }
+    }
+
+}
